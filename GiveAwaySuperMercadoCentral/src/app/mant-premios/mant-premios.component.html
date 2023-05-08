@@ -26,7 +26,6 @@
         crossorigin="anonymous"></script>
     <title>Mantenimiento Rifa [ PREMIOS ]</title>
     <link rel="stylesheet" href="mant-premios.component.scss">
-
 </head>
 
 
@@ -34,17 +33,16 @@
 <body>
     <div class="d-flex justify-content-center" id="div1">
         <div class="container mt-5" id="div2">
-            <img class="col-6 col-sm-6 col-md-6 col-lg-5 mt-5" src="../../assets/RifaCentral.jpg" alt="Logo Central">
+            <img class="col-6 col-sm-6 col-md-6 col-lg-5 mt-5" src="assets/RifaCentral.jpg" alt="Logo Central" (click)="ir(1)">
             <div class="container mt-5">
                 <div class="row">
                     <div class="col">
                         <div class="card-body">
                             <h1 class="mb-3">Mantenimiento Premios</h1>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4 ">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text col-6 col-sm-6 col-md-6 col-lg-5 "
-                                        id="basic-addon1">Monto de los Premios
-                                        Ganadores</span>
+                                        id="basic-addon1">Premio</span>
                                     <input [(ngModel)]="premio1" type="text" id="select" class="form-control"
                                         aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                         required>

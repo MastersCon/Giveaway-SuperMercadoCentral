@@ -7,6 +7,8 @@ import { SorteoPremiosComponent } from './sorteo-premios/sorteo-premios.componen
 import { RifaComponent } from './rifa/rifa.component';
 import { FormsModule } from '@angular/forms';
 import { MantPremiosComponent } from './mant-premios/mant-premios.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RifaEmpleadosComponent } from './rifa-empleados/rifa-empleados.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { MantPremiosComponent } from './mant-premios/mant-premios.component';
     SorteoPremiosComponent,
     RifaComponent,
     MantPremiosComponent,
+    RifaEmpleadosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     
 
   ],

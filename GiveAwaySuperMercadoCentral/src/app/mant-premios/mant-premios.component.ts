@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,9 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class MantPremiosComponent implements OnInit {
   premios: any = []
   premio1: any;
-  router: any;
   IDRank: any;
-  constructor() {
+  constructor(public router: Router) {
   }
 
 
@@ -27,7 +27,7 @@ export class MantPremiosComponent implements OnInit {
     } else if (this.IDRank = 1) {
       this.IDRank = ID + 1;
       localStorage.setItem("ID", JSON.stringify(this.IDRank))
-      if (this.IDRank == 6) {
+      if (this.IDRank == 20) {
       localStorage.removeItem('ID');
       location.reload();
       }
@@ -39,6 +39,12 @@ export class MantPremiosComponent implements OnInit {
     }
     this.premios.push(premiosactualizado)
     localStorage.setItem("Premios", JSON.stringify(this.premios))
+  }
+
+  ir(e:any){
+    if(e==1){
+      this.router.navigateByUrl('/menu')
+    }
   }
 
 }
