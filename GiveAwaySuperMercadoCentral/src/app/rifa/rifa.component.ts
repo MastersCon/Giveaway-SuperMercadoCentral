@@ -24,16 +24,30 @@ export class RifaComponent implements OnInit {
   chosenElements: any = []
   excelFinal: any = []
   idPremio: any;
-  preios: string= '';
-  constructor(private route: ActivatedRoute, private Sqlservicio: ServiciosService, public router: Router,private http: HttpClient) {
+  preios: string = '';
+  constructor(private route: ActivatedRoute, private Sqlservicio: ServiciosService, public router: Router, private http: HttpClient,) {
     this.premios()
+    this.verificarPremiosEnLocalStorage();
 
   }
 
   ngOnInit(): void {
 
   }
+
+  verificarPremiosEnLocalStorage() {
+    console.log("hola")
+    const premios = localStorage.getItem('Premios');
+    if (!premios) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debe ingresar los premios para poder acceder',
+      });
+      this.router.navigate(['/']);
+    }
+  }
   premios() {
+    this.verificarPremiosEnLocalStorage()
     this.arrayPremios = JSON.parse(localStorage.getItem("Premios")!)
     const ganador = this.arrayPremios[Math.floor(Math.random() * this.arrayPremios.length)];
 
@@ -42,7 +56,7 @@ export class RifaComponent implements OnInit {
   selectPremio(e: Event) {
     let Id: any = ((e.target as HTMLInputElement).value);
     this.idPremio = String(Id)
-    this.preios =  String(Id);
+    this.preios = String(Id);
     console.log(this.idPremio)
   }
   sorteoGiveAway(item: any) {
@@ -53,12 +67,12 @@ export class RifaComponent implements OnInit {
     console.log(this.chosenElements)
     while (this.chosenElements.length < item) {
       console.log(this.chosenElements)
-       const randomIndex = Math.floor(Math.random() * this.excelFinal.length)
-       const randomElement = this.excelFinal[randomIndex]
-       if (!cedulas.has(randomElement.Cedula)) {
-           this.chosenElements.push(randomElement)
-           cedulas.add(randomElement.Cedula)
-       }
+      const randomIndex = Math.floor(Math.random() * this.excelFinal.length)
+      const randomElement = this.excelFinal[randomIndex]
+      if (!cedulas.has(randomElement.Cedula)) {
+        this.chosenElements.push(randomElement)
+        cedulas.add(randomElement.Cedula)
+      }
     }
 
     this.excelFinal = this.excelFinal.filter((objeto: any) => !this.chosenElements.some((o: any) => o.Cedula === objeto.Cedula));
@@ -69,8 +83,8 @@ export class RifaComponent implements OnInit {
       this.Sqlservicio.ganadores(this.chosenElements[i]).subscribe((data: any) => {
       })
 
-        this.proximoGanadorGiveAway();
-        // Swal.showLoading(Swal.getDenyButton());
+      this.proximoGanadorGiveAway();
+      // Swal.showLoading(Swal.getDenyButton());
 
     }
     console.log(this.chosenElements)
@@ -83,12 +97,12 @@ export class RifaComponent implements OnInit {
     console.log(this.chosenElements)
     while (this.chosenElements.length < item) {
       console.log(this.chosenElements)
-       const randomIndex = Math.floor(Math.random() * this.excelFinal.length)
-       const randomElement = this.excelFinal[randomIndex]
-       if (!codigos.has(randomElement.codigoInterno)) {
-           this.chosenElements.push(randomElement)
-           codigos.add(randomElement.codigoInterno)
-       }
+      const randomIndex = Math.floor(Math.random() * this.excelFinal.length)
+      const randomElement = this.excelFinal[randomIndex]
+      if (!codigos.has(randomElement.codigoInterno)) {
+        this.chosenElements.push(randomElement)
+        codigos.add(randomElement.codigoInterno)
+      }
 
     }
 
@@ -100,8 +114,8 @@ export class RifaComponent implements OnInit {
         console.log(data)
       })
 
-        this.proximoGanadorGiveAway();
-        // Swal.showLoading(Swal.getDenyButton());
+      this.proximoGanadorGiveAway();
+      // Swal.showLoading(Swal.getDenyButton());
 
     }
     console.log(this.chosenElements)
@@ -171,22 +185,22 @@ export class RifaComponent implements OnInit {
           setTimeout(() => {
             // Swal.showLoading(Swal.getDenyButton());
 
-          Swal.fire({
-            title: '<h1>' + '<b>SUPERMERCADO CENTRAL TE PREMIA!!</b>' + '</h1>' +'<br>'+ '<h1>' + '<b>GANADOR  #</b>' + (i + 1) +'<br>'+'<br>'+'<b>Premio' +'<br>'+'<h1>'+self.chosenElements[i].premio +'</h1>'+'</h1>' +'<br>',
-            width: 1200,
-            padding: '7em',
-            html: '<h1>' + '<b>Nombre:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Nombre + '</h1>' + '<br>' + '<h1>'+'<b>Boleta:</b>'+'</h1>' + '<h1>' + self.chosenElements[i].Boleta + '</h1>' + '<h1>' + '<br>' + '<h1>' + '<b>Cedula:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Cedula.substr(0, 3) + "******" + self.chosenElements[i].Cedula.substr(self.chosenElements[i].Cedula.length - 3) + '</h1>' + '<br>' + '<h1>' + '<b>Factura:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Factura + '</h1>' + '<br>' + '<h1>' + '<b>Teléfono:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Telefono.substr(0, 3) + "******" + self.chosenElements[i].Telefono.substr(self.chosenElements[i].Telefono.length - 3) + '</h1>',
-            color: '#218e27',
-            background: '#fff url(assets/confetti.gif)',
-            backdrop: `
+            Swal.fire({
+              title: '<h1>' + '<b>SUPERMERCADO CENTRAL TE PREMIA!!</b>' + '</h1>' + '<br>' + '<h1>' + '<b>GANADOR  #</b>' + (i + 1) + '<br>' + '<br>' + '<b>Premio' + '<br>' + '<h1>' + self.chosenElements[i].premio + '</h1>' + '</h1>' + '<br>',
+              width: 1200,
+              padding: '7em',
+              html: '<h1>' + '<b>Nombre:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Nombre + '</h1>' + '<br>' + '<h1>' + '<b>Boleta:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Boleta + '</h1>' + '<h1>' + '<br>' + '<h1>' + '<b>Cedula:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Cedula.substr(0, 3) + "******" + self.chosenElements[i].Cedula.substr(self.chosenElements[i].Cedula.length - 3) + '</h1>' + '<br>' + '<h1>' + '<b>Factura:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Factura + '</h1>' + '<br>' + '<h1>' + '<b>Teléfono:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Telefono.substr(0, 3) + "******" + self.chosenElements[i].Telefono.substr(self.chosenElements[i].Telefono.length - 3) + '</h1>',
+              color: '#218e27',
+              background: '#fff url(assets/confetti.gif)',
+              backdrop: `
                 rgba(0,0,123,0.4)
                   url("https://i.gifer.com/W9k1.gif")
                 `,
-            confirmButtonText: '<h3>' + 'Siguiente Ganador' +'<h3>',
-          }).then(() => {
-            mostrarAlerta(i + 1)
-          })
-        },1000);
+              confirmButtonText: '<h3>' + 'Siguiente Ganador' + '<h3>',
+            }).then(() => {
+              mostrarAlerta(i + 1)
+            })
+          }, 1000);
         }
       }
       // Swal.showLoading(Swal.getDenyButton());
@@ -195,8 +209,8 @@ export class RifaComponent implements OnInit {
     }, 1000);
   }
 
-  ir(e:any){
-    if(e==1){
+  ir(e: any) {
+    if (e == 1) {
       this.router.navigateByUrl('/menu')
     }
   }

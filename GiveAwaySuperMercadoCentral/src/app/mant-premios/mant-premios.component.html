@@ -3,76 +3,77 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap datatable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
-        crossorigin="anonymous"></script>
-    <title>Mantenimiento Rifa [ PREMIOS ]</title>
-    <link rel="stylesheet" href="mant-premios.component.scss">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap datatable -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css" />
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+    integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+    crossorigin="anonymous"></script>
+  <title>Mantenimiento Rifa [ PREMIOS ]</title>
+  <link rel="stylesheet" href="mant-premios.component.scss">
 </head>
 
 
 
 <body>
-    <div class="d-flex justify-content-center" id="div1">
-        <div class="container mt-5" id="div2">
-            <img class="col-6 col-sm-6 col-md-6 col-lg-5 mt-5" src="assets/RifaCentral.jpg" alt="Logo Central" (click)="ir(1)">
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col">
-                        <div class="card-body">
-                            <h1 class="mb-3">Mantenimiento Premios</h1>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4 ">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text col-6 col-sm-6 col-md-6 col-lg-5 "
-                                        id="basic-addon1">Premio</span>
-                                    <input [(ngModel)]="premio1" type="text" id="select" class="form-control"
-                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-                                        required>
-                                </div>
+  <div class="d-flex justify-content-center" id="div1">
+    <div class="container mt-5" id="div2">
+      <img class="col-6 col-sm-6 col-md-6 col-lg-5 mt-5" src="assets/RifaCentral.jpg" alt="Logo Central"
+        (click)="ir(1)">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col">
+            <div class="card-body">
+              <h1 class="mb-3">Mantenimiento Premios</h1>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4 text-center">
 
 
-                                <div class="card mt-4 mb-3" id="select" *ngFor="let item of this.premios">
-                                    <div class="row g-0">
-                                        <div class="col-md-4" id="select1" style="background-color: #6ca414 ;">
-                                            <b id="classB">{{item.numero}}° Premio</b>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                {{item.descripcion}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <button (click)="agregarpremio()" id="BotonGx" class="btn btn-outline"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Actualizar
-                                    Premio</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text col-6 col-sm-6 col-md-6 col-lg-5 " id="basic-addon1">Premio</span>
+                  <input [(ngModel)]="premio1" type="text" id="select" class="form-control"
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
                 </div>
+
+
+                <div class="card mt-4 mb-3" id="select" *ngFor="let item of this.premios">
+                  <div class="row g-0">
+                    <div class="col-md-4" id="select1" style="background-color: #6ca414 ;">
+                      <b id="classB">{{item.numero}}° Premio</b>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        {{item.descripcion}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button (click)="agregarpremio()" id="BotonGx" class="btn btn-outline" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">Actualizar
+                  Premio
+                </button>
+                <button id="BotonGx1" class="btn btn-outline" *ngIf="this.IDRank" (click)="limpiar()">Reiniciar Premios
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
 </body>

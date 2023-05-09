@@ -67,21 +67,20 @@
                         <div class="card-body">
                             <h1 class="mb-3">Parametros de rifa</h1>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text col-4 col-sm-4 col-md-4 col-lg-2"
-                                        id="basic-addon1">#Ganadores</span>
-                                    <input type="text" id="select" [(ngModel)]="numero" class="form-control"
-                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                                </div>
+                              <div class="input-group mb-3">
+                                <span class="input-group-text col-4 col-sm-4 col-md-4 col-lg-2" id="basic-addon1">#Ganadores</span>
+                                <input type="text" id="select" [(ngModel)]="numero" class="form-control"
+                                  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                  [disabled]="!archivoSubido">
+                              </div>
+                              <div class="input-group mb-3">
+                                <span class="input-group-text col-4 col-sm-4 col-md-4 col-lg-2" id="basic-addon1">Premio</span>
+                                <select (change)="selectPremio($event)" class="form-select" id="select" aria-label="Default select example" [disabled]="!ganadoresHabilitado">
+                                  <option selected>Seleccione los premios</option>
+                                  <option *ngFor="let item of this.arrayPremios">{{item.descripcion}}</option>
+                                </select>
+                              </div>
 
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text col-4 col-sm-4 col-md-4 col-lg-2"
-                                        id="basic-addon1">Premio</span>
-                                    <select (change)="selectPremio($event)" class="form-select" id="select" aria-label="Default select example">
-                                        <option selected>Seleccione los premios</option>
-                                        <option   *ngFor="let item of this.arrayPremios">{{item.descripcion}}</option>
-                                    </select>
-                                </div>
                             </div>
                             <br>
                             <br>

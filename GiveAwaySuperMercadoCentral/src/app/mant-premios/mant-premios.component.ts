@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -28,8 +29,8 @@ export class MantPremiosComponent implements OnInit {
       this.IDRank = ID + 1;
       localStorage.setItem("ID", JSON.stringify(this.IDRank))
       if (this.IDRank == 20) {
-      localStorage.removeItem('ID');
-      location.reload();
+        localStorage.removeItem('ID');
+        location.reload();
       }
     }
 
@@ -41,10 +42,28 @@ export class MantPremiosComponent implements OnInit {
     localStorage.setItem("Premios", JSON.stringify(this.premios))
   }
 
-  ir(e:any){
-    if(e==1){
+
+  limpiar(): void {
+    // Mostrar modal con mensaje
+    Swal.fire({
+      title: '<h2>Mensaje</h2>',
+      html: '<p>Los Premios estan siendo Eliminado<br>Espere 3 Segundos</p>',
+      icon: 'info',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      willClose: () => {
+        // Limpiar localStorage y recargar página
+        localStorage.clear();
+        window.location.reload();
+      }
+    });
+  }
+  ir(e: any) {
+    if (e == 1) {
       this.router.navigateByUrl('/menu')
     }
   }
 
 }
+

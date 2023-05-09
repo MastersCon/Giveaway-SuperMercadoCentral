@@ -24,14 +24,32 @@ export class RifaEmpleadosComponent implements OnInit {
   excelFinal: any = []
   idPremio: any;
   preios: string= '';
+  archivoSubido = false;
+  archivoCargado: any;
+  ganadoresHabilitado: boolean = false;
+
+
   constructor(private route: ActivatedRoute, private Sqlservicio: ServiciosService, public router: Router,private http: HttpClient) {
     this.premios()
+    this.verificarPremiosEnLocalStorage();
   }
 
   ngOnInit(): void {
 
 }
+verificarPremiosEnLocalStorage() {
+    console.log("hola")
+    const premios = localStorage.getItem('Premios');
+    if (!premios) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debe ingresar los premios para poder acceder',
+      });
+      this.router.navigate(['/']);
+    }
+  }
 premios() {
+  this.verificarPremiosEnLocalStorage()
   this.arrayPremios = JSON.parse(localStorage.getItem("Premios")!)
   const ganador = this.arrayPremios[Math.floor(Math.random() * this.arrayPremios.length)];
 
@@ -134,7 +152,6 @@ ReadExcel(event: any) {
 }
 
 ReadExcelInterno(event: any) {
-
   let file = event.target.files[0];
   let fileReader = new FileReader();
   fileReader.readAsBinaryString(file);
@@ -155,13 +172,25 @@ ReadExcelInterno(event: any) {
       this.excelFinal.push(datoFinal)
       console.log(this.excelFinal)
     });
+
+    // Set archivoCargado and ganadoresHabilitado to true when file is loaded
+    this.archivoSubido = true;
+    this.ganadoresHabilitado = true;
+
   }
 }
 
 // Empleado Generador
 proximoGanador() {
-  // Swal.showLoading(Swal.getDenyButton());
-
+  if (!this.archivoSubido) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Archivo no cargado',
+        html: 'Por favor, cargue un Documento antes de continuar.<br>Para hacerlo, presione la TUERCA.',
+        confirmButtonText: 'Aceptar'
+    });
+    return;
+  }
   setTimeout(() => {
     let indexGanador = 0;
     let self = this;
@@ -194,47 +223,11 @@ proximoGanador() {
   }, 1000);
 }
 
-// Rifa Generador
-
-// proximoGanadorGiveAway() {
-//   Swal.showLoading(Swal.getDenyButton());
-
-//   setTimeout(() => {
-//     let indexGanador = 0;
-//     let self = this;
-//     function mostrarAlerta(i: any) {
-//       if (i < self.chosenElements.length) {
-//         setTimeout(() => {
-//           Swal.showLoading(Swal.getDenyButton());
-
-//         Swal.fire({
-//           title: '<h1>' + '<b>SUPERMERCADO CENTRAL TE PREMIA!!</b>' + '</h1>' +'<br>'+ '<h1>' + '<b>GANADOR  #</b>' + (i + 1) +'<br>'+'<br>'+'<b>Premio' +'<br>'+'<h1>'+self.chosenElements[i].premio +'</h1>'+'</h1>' +'<br>',
-//           width: 1200,
-//           padding: '7em',
-//           html: '<h1>' + '<b>Nombre:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Nombre + '</h1>' + '<br>' + '<h1>'+'<b>Boleta:</b>'+'</h1>' + '<h1>' + self.chosenElements[i].Boleta + '</h1>' + '<h1>' + '<br>' + '<h1>' + '<b>Cedula:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Cedula.substr(0, 3) + "******" + self.chosenElements[i].Cedula.substr(self.chosenElements[i].Cedula.length - 3) + '</h1>' + '<br>' + '<h1>' + '<b>Factura:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Factura + '</h1>' + '<br>' + '<h1>' + '<b>Teléfono:</b>' + '</h1>' + '<h1>' + self.chosenElements[i].Telefono.substr(0, 3) + "******" + self.chosenElements[i].Telefono.substr(self.chosenElements[i].Telefono.length - 3) + '</h1>',
-//           color: '#218e27',
-//           background: '#fff url(assets/confetti.gif)',
-//           backdrop: `
-//               rgba(0,0,123,0.4)
-//                 url("https://i.gifer.com/W9k1.gif")
-//               `,
-//           confirmButtonText: '<h3>' + 'Siguiente Ganador' +'<h3>',
-//         }).then(() => {
-//           mostrarAlerta(i + 1)
-//         })
-//       },1000);
-//       }
-//     }
-//      Swal.showLoading(Swal.getDenyButton());
-
-//     mostrarAlerta(indexGanador)
-//   }, 1000);
-// }
-
 ir(e:any){
   if(e==1){
     this.router.navigateByUrl('/menu')
   }
 }
 }
+
 
